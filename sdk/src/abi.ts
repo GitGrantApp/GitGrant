@@ -1,0 +1,250 @@
+export const escrowAbi = [
+  {
+    type: "function",
+    name: "createBountyETH",
+    inputs: [
+      { name: "issueUri", type: "string" },
+      { name: "deadline", type: "uint256" },
+    ],
+    outputs: [{ name: "bountyId", type: "bytes32" }],
+    stateMutability: "payable",
+  },
+  {
+    type: "function",
+    name: "createBountyToken",
+    inputs: [
+      { name: "issueUri", type: "string" },
+      { name: "token", type: "address" },
+      { name: "totalAmount", type: "uint256" },
+      { name: "deadline", type: "uint256" },
+    ],
+    outputs: [{ name: "bountyId", type: "bytes32" }],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "claim",
+    inputs: [{ name: "bountyId", type: "bytes32" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "submit",
+    inputs: [{ name: "bountyId", type: "bytes32" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "release",
+    inputs: [{ name: "bountyId", type: "bytes32" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "cancel",
+    inputs: [{ name: "bountyId", type: "bytes32" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "expire",
+    inputs: [{ name: "bountyId", type: "bytes32" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "dispute",
+    inputs: [{ name: "bountyId", type: "bytes32" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "resolve",
+    inputs: [
+      { name: "bountyId", type: "bytes32" },
+      { name: "payClaimant", type: "bool" },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "getBounty",
+    inputs: [{ name: "bountyId", type: "bytes32" }],
+    outputs: [
+      {
+        name: "",
+        type: "tuple",
+        components: [
+          { name: "creator", type: "address" },
+          { name: "token", type: "address" },
+          { name: "amount", type: "uint256" },
+          { name: "fee", type: "uint256" },
+          { name: "deadline", type: "uint256" },
+          { name: "claimant", type: "address" },
+          { name: "status", type: "uint8" },
+          { name: "issueUri", type: "string" },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "computeId",
+    inputs: [{ name: "issueUri", type: "string" }],
+    outputs: [{ name: "", type: "bytes32" }],
+    stateMutability: "pure",
+  },
+  {
+    type: "function",
+    name: "getBountyCount",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "event",
+    name: "BountyCreated",
+    inputs: [
+      { name: "bountyId", type: "bytes32", indexed: true },
+      { name: "creator", type: "address", indexed: true },
+      { name: "token", type: "address", indexed: false },
+      { name: "amount", type: "uint256", indexed: false },
+      { name: "deadline", type: "uint256", indexed: false },
+      { name: "issueUri", type: "string", indexed: false },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "BountyClaimed",
+    inputs: [
+      { name: "bountyId", type: "bytes32", indexed: true },
+      { name: "claimant", type: "address", indexed: true },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "BountySubmitted",
+    inputs: [
+      { name: "bountyId", type: "bytes32", indexed: true },
+      { name: "claimant", type: "address", indexed: true },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "BountyCompleted",
+    inputs: [
+      { name: "bountyId", type: "bytes32", indexed: true },
+      { name: "claimant", type: "address", indexed: true },
+      { name: "payout", type: "uint256", indexed: false },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "BountyDisputed",
+    inputs: [
+      { name: "bountyId", type: "bytes32", indexed: true },
+      { name: "disputedBy", type: "address", indexed: true },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "BountyResolved",
+    inputs: [
+      { name: "bountyId", type: "bytes32", indexed: true },
+      { name: "winner", type: "address", indexed: true },
+      { name: "payout", type: "uint256", indexed: false },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "BountyExpired",
+    inputs: [
+      { name: "bountyId", type: "bytes32", indexed: true },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "BountyCancelled",
+    inputs: [
+      { name: "bountyId", type: "bytes32", indexed: true },
+    ],
+    anonymous: false,
+  },
+] as const;
+
+export const attestationAbi = [
+  {
+    type: "function",
+    name: "mint",
+    inputs: [
+      { name: "contributor", type: "address" },
+      { name: "bountyId", type: "bytes32" },
+      { name: "issueUri", type: "string" },
+      { name: "token", type: "address" },
+      { name: "amount", type: "uint256" },
+    ],
+    outputs: [{ name: "id", type: "uint256" }],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "getContributorAttestations",
+    inputs: [{ name: "contributor", type: "address" }],
+    outputs: [{ name: "", type: "uint256[]" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getAttestation",
+    inputs: [{ name: "id", type: "uint256" }],
+    outputs: [
+      {
+        name: "",
+        type: "tuple",
+        components: [
+          { name: "contributor", type: "address" },
+          { name: "bountyId", type: "bytes32" },
+          { name: "issueUri", type: "string" },
+          { name: "token", type: "address" },
+          { name: "amount", type: "uint256" },
+          { name: "completedAt", type: "uint256" },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "totalAttestations",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "event",
+    name: "AttestationMinted",
+    inputs: [
+      { name: "id", type: "uint256", indexed: true },
+      { name: "contributor", type: "address", indexed: true },
+      { name: "bountyId", type: "bytes32", indexed: true },
+      { name: "issueUri", type: "string", indexed: false },
+      { name: "amount", type: "uint256", indexed: false },
+    ],
+    anonymous: false,
+  },
+] as const;

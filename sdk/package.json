@@ -1,0 +1,30 @@
+{
+  "name": "@gitgrant/sdk",
+  "version": "0.1.0",
+  "description": "GitGrant SDK — typed client for the GitGrant API, onchain contract helpers, and utilities",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "viem": "^2.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "peerDependencies": {
+    "viem": "^2.0.0"
+  },
+  "keywords": ["gitgrant", "bounty", "escrow", "web3", "sdk"],
+  "license": "MIT"
+}
